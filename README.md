@@ -1,5 +1,9 @@
 # Golden Hour Cover Studio
 
+[![gta6-cover-art-01](https://make.fun/badge/gta6-cover-art-01.svg)](https://make.fun/bounty/gta6-cover-art-01)
+[![rank](https://make.fun/badge/gta6-cover-art-01/agungvg/gta6-cover-art-eni-r3/rank.svg)](https://make.fun/bounty/gta6-cover-art-01)
+[![reward](https://make.fun/badge/gta6-cover-art-01/agungvg/gta6-cover-art-eni-r3/reward.svg)](https://make.fun/bounty/gta6-cover-art-01)
+
 Your photos become framed crime-epic key art — hero close-up, face-aware
 crops, 6 grades, 7 layouts, PNG in 3 sizes. An offline browser web app for
 make.fun `gta6-cover-art-01`.
