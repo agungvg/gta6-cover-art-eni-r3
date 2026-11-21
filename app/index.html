@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Golden Hour Cover Studio — your photos become framed crime-epic key art</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">★</span>
+    <div>
+      <h1>Golden Hour Cover Studio</h1>
+      <p>Your photos become framed crime-epic key art — hero close-up, face-aware crops, 5 grades, PNG in 3 sizes</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <span class="offline-badge">Photos never leave this device</span>
+    <button id="undoBtn" title="Undo">↩ Undo</button>
+    <button id="redoBtn" title="Redo">↪ Redo</button>
+    <button id="surpriseBtn" class="accent">✦ Surprise me</button>
+    <button id="autoBtn">Auto layout</button>
+  </div>
+</header>
+
+<nav class="steps">
+  <button class="step-dot active" data-step="1"><b>1</b> Add photos</button>
+  <button class="step-dot" data-step="2"><b>2</b> Caption</button>
+  <button class="step-dot" data-step="3"><b>3</b> Export PNG</button>
+</nav>
+
+<main class="editor">
+  <aside class="left">
+    <section class="step-panel open" id="panel-step-1">
+      <h2>1 · Add photos</h2>
+      <div id="dropZone" class="drop">
+        <p><b>Drop photos here</b> — or click to choose, or paste anywhere</p>
+        <p class="muted">JPG / PNG, any size. They stay on this machine.</p>
+        <input type="file" id="fileInput" accept="image/*" multiple hidden>
+      </div>
+      <button id="sampleBtn" class="wide">Try samples — 7-person demo cast</button>
+      <h3>Photos</h3>
+      <div id="photoStrip" class="strip"></div>
+      <p class="muted">Click a thumbnail to place it in the selected panel. Click a panel on the cover to select it, drag inside a panel to pan the face, double-click to reset it.</p>
+      <button id="next1" class="wide accent">Next: Caption →</button>
+    </section>
+
+    <section class="step-panel" id="panel-step-2">
+      <h2>2 · Caption</h2>
+      <label>Title <input id="titleInput" maxlength="24"></label>
+      <label>Script subtitle <input id="scriptInput" maxlength="32"></label>
+      <label>Tagline ribbon <input id="taglineInput" maxlength="48"></label>
+      <label>Press quote <input id="quoteInput" maxlength="48"></label>
+      <label>Quote outlet <input id="outletInput" maxlength="32"></label>
+      <label>Billing line 1 <input id="billing1Input" maxlength="64"></label>
+      <label>Billing line 2 <input id="billing2Input" maxlength="64"></label>
+      <div class="row">
+        <label>Seal <input id="sealInput" maxlength="12"></label>
+        <label>Volume <input id="volInput" maxlength="10"></label>
+        <label>Release <input id="releaseInput" maxlength="14"></label>
+      </div>
+      <div class="btn-row">
+        <button id="back2">← Back</button>
+        <button id="next2" class="accent">Next: Export →</button>
+      </div>
+    </section>
+
+    <section class="step-panel" id="panel-step-3">
+      <h2>3 · Export PNG</h2>
+      <div id="exportRows"></div>
+      <button id="exportAll" class="wide accent">Export all 3 PNGs</button>
+      <p class="muted">The preview canvas is exactly what the PNG holds — same renderer, same pixels.</p>
+      <button id="back3">← Back to caption</button>
+    </section>
+
+    <section class="look">
+      <h3>Look</h3>
+      <label>Paint <input type="range" id="look-paint" min="0" max="100" value="45"><span id="look-paint-val">45%</span></label>
+      <label>Grade <input type="range" id="look-grade" min="0" max="100" value="70"><span id="look-grade-val">70%</span></label>
+      <label>Halftone <input type="range" id="look-halftone" min="0" max="100" value="22"><span id="look-halftone-val">22%</span></label>
+      <label>Grain <input type="range" id="look-grain" min="0" max="100" value="30"><span id="look-grain-val">30%</span></label>
+      <label>Glow <input type="range" id="look-glow" min="0" max="100" value="40"><span id="look-glow-val">40%</span></label>
+    </section>
+  </aside>
+
+  <section class="center">
+    <div class="preview-wrap">
+      <canvas id="preview" width="1080" height="1080"></canvas>
+    </div>
+    <p class="muted center-note">Live preview — drag a panel to pan its face · double-click to reset · the title never covers eyes or mouth</p>
+  </section>
+
+  <aside class="right">
+    <section>
+      <h3>Layouts — 7</h3>
+      <div id="layoutGrid" class="layout-grid"></div>
+    </section>
+    <section>
+      <h3>Grades — 6</h3>
+      <div id="gradeGrid" class="grade-grid"></div>
+    </section>
+    <section class="panel-controls">
+      <h3>Selected panel</h3>
+      <p id="panelLabel">Panel 1 of 7</p>
+      <label>Zoom <input type="range" id="zoomSlider" min="100" max="220" value="112"><span id="zoomVal">112%</span></label>
+      <label>Role tag <input id="roleInput" maxlength="14"></label>
+      <div class="btn-grid">
+        <button id="prevPhoto">← Photo</button>
+        <button id="nextPhoto">Photo →</button>
+        <button id="flipBtn">Flip photo</button>
+        <button id="swapBtn">Swap panels</button>
+        <button id="faceBtn">Face-aware crop</button>
+        <button id="resetPanel">Reset panel</button>
+      </div>
+    </section>
+  </aside>
+</main>
+
+<div id="flash" role="status"></div>
+<script type="module">
+  const shot = new URLSearchParams(location.search).get('shot');
+  if (shot === 'cover') {
+    await import('./src/shots.js');
+  } else {
+    await import('./src/main.js');
+  }
+</script>
+</body>
+</html>
